@@ -3,12 +3,21 @@ ifndef VERBOSE
 endif
 
 test: dependencies
-	@echo "Running hlchunk tests..."
+	@echo "Running mult_level_cache tests..."
 	timeout 300 nvim -e \
 		--headless \
 		--noplugin \
 		-u test/spec.lua \
 		-c "PlenaryBustedDirectory test/features {minimal_init = 'test/spec.lua'}"
+
+benchmark: dependencies
+	@echo "Running mult_level_cache benchmark"
+	timeout 300 nvim -e \
+		--headless \
+		--noplugin \
+		-u test/spec.lua \
+		-c "luafile test/benchmark.lua" \
+		-c "qa!"
 
 stylua:
 	stylua --check .
