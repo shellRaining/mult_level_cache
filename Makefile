@@ -10,13 +10,22 @@ test: dependencies
 		-u test/spec.lua \
 		-c "PlenaryBustedDirectory test/features {minimal_init = 'test/spec.lua'}"
 
-benchmark: dependencies
+time_benchmark: dependencies
 	@echo "Running mult_level_cache benchmark"
 	timeout 300 nvim -e \
 		--headless \
 		--noplugin \
 		-u test/spec.lua \
-		-c "luafile test/benchmark.lua" \
+		-c "luafile test/time_benchmark.lua" \
+		-c "qa!"
+
+memory-benchmark: dependencies
+	@echo "Running mult_level_cache memory benchmark"
+	timeout 300 nvim -e \
+		--headless \
+		--noplugin \
+		-u test/spec.lua \
+		-c "luafile test/memory_benchmark.lua" \
 		-c "qa!"
 
 stylua:
